@@ -1,0 +1,13 @@
+{
+  "id": "ryoamiclights",
+  "version": "${version}",
+  "name": "My Awesome Mod",
+  "description": "Adds dynamic lights to the game",
+  "authors": ["TexTrue", "TexTrueStudio"],
+  "license": "MIT",
+  "mixins": ["lambdynlights.mixins.json", "lambdynlights.lightsource.mixins.json"],
+  "accessWidener": "lambdynlights.accesswidener",
+  "entryPoints": {
+    "main": "dev.lambdaurora.lambdynlights.LambDynLights"
+  }
+}

@@ -1,0 +1,59 @@
+plugins {
+	id 'flint-steel' version '0.1.0'
+	id 'java-library'
+	id 'maven-publish'
+}
+
+group = project.maven_group
+version = "${project.mod_version}+${project.minecraft_version}"
+base.archivesName = project.archives_base_name
+
+// This field defines the Java version your mod target.
+def targetJavaVersion = 17
+
+repositories {
+	mavenCentral()
+	maven {
+		name "Quilt"
+		url "https://maven.quiltmc.org/repository/release"
+	}
+}
+
+steel {
+	accessWidenerPath = file("src/main/resources/lambdynlights.accesswidener")
+}
+
+dependencies {
+	minecraft "com.mojang:minecraft:${project.minecraft_version}"
+	mappings "org.quiltmc:quilt-mappings:${minecraft_version}+build.${project.quilt_mappings}:intermediary-v2"
+
+	modImplementation "net.flintloader:punch:${flint_version}"
+	modImplementation "net.flintloader:flint-api:${flint_api}"
+}
+
+java {
+	sourceCompatibility = JavaVersion.toVersion(targetJavaVersion)
+	targetCompatibility = JavaVersion.toVersion(targetJavaVersion)
+
+	withSourcesJar()
+}
+
+tasks.withType(JavaCompile).configureEach {
+	it.options.encoding = 'UTF-8'
+
+	it.options.release.set(targetJavaVersion)
+}
+
+processResources {
+	inputs.property 'version', project.version
+
+	filesMatching('META-INF/mods.toml') {
+		expand 'version': project.version
+	}
+}
+
+jar {
+	from('LICENSE') {
+		rename { "${it}_${base.archivesName}" }
+	}
+}

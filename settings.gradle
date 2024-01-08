@@ -1,0 +1,15 @@
+pluginManagement {
+	repositories {
+		maven {
+			url = "https://maven.flintloader.net/releases"
+			name = "Flint Releases"
+		}
+		maven {
+			url = "https://maven.flintloader.net/mirror"
+			name = "Flint Mirror"
+		}
+		gradlePluginPortal()
+	}
+}
+
+rootProject.name = "RyoamicLights"

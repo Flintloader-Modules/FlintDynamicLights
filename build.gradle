@@ -8,6 +8,12 @@ group = project.maven_group
 version = "${project.mod_version}+${project.minecraft_version}"
 base.archivesName = project.archives_base_name
 
+def ENV = System.getenv()
+if (ENV.BUILD_NUMBER) {
+	var build = (ENV.BUILD_NUMBER.toInteger() - 1)
+	version = "${project.mod_version}.${build}+${project.minecraft_version}"
+}
+
 // This field defines the Java version your mod target.
 def targetJavaVersion = 17
 
